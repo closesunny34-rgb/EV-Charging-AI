@@ -389,7 +389,7 @@ st.write(
     f"{cost_saving}%"
 )
 
-    st.subheader("📊 충전 환경 분석")
+st.subheader("📊 충전 환경 분석")
 
 if load_score == 2:
 
