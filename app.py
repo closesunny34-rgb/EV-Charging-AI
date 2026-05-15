@@ -132,7 +132,7 @@ charging_type_text = st.selectbox(
 )
 
 departure_time = st.selectbox(
-    "예상 출발 시간",
+    "충전 시작 시간",
     list(range(0, 24)),
     index=8
 )
@@ -332,7 +332,10 @@ else:
     )
 
 # 요금 판단
+# 요금 판단
 if charging_fee > 15000:
+
+    fee_message = "높은 요금"
 
     st.warning(
         "💰 충전요금 높음"
@@ -340,16 +343,23 @@ if charging_fee > 15000:
 
 elif charging_fee > 8000:
 
+    fee_message = "보통 요금"
+
     st.info(
         "충전요금 보통"
     )
 
 else:
 
+    fee_message = "낮은 요금"
+
     st.success(
         "충전요금 낮음"
     )
 
+st.write(
+    f"지금은 {fee_message} 시간대입니다."
+)
     if (
         outside_temperature > 30
         and charging_type_text == '급속'
