@@ -282,18 +282,26 @@ input_data = pd.DataFrame({
 
 if st.button("AI 충전 추천 받기"):
 
-    prediction = model.predict(
-        input_data
-    )[0]
+    prediction = float(
 
-    prediction = round(prediction, 1)
+        model.predict(
+            input_data
+        )[0]
+
+    )
+
+    prediction = round(
+        prediction,
+        1
+    )
+
     # =========================
-# 추천 충전 시간 계산
-# =========================
+    # 추천 충전 시간 계산
+    # =========================
 
-recommended_hour = (
-    current_hour + int(prediction)
-) % 24
+    recommended_hour = (
+        current_hour + int(prediction)
+    ) % 24
 # =========================
 # 추천 시간대 혼잡도 조회
 # =========================
