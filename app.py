@@ -287,10 +287,107 @@ if st.button("AI 충전 추천 받기"):
     )[0]
 
     prediction = round(prediction, 1)
+    # =========================
+# 추천 충전 시간 계산
+# =========================
+
+recommended_hour = (
+    current_hour + int(prediction)
+) % 24
+# =========================
+# 추천 시간대 혼잡도 조회
+# =========================
+
+recommended_load_result = hourly_avg_load[
+
+    (hourly_avg_load['hour']
+     == recommended_hour)
+
+    &
+
+    (hourly_avg_load['충전방식']
+     == charging_type_text)
+]
+
+if len(recommended_load_result) > 0:
+
+    recommended_load = (
+        recommended_load_result[
+            'charging_load'
+        ].values[0]
+    )
+
+else:
+
+    recommended_load = charging_load
+# =========================
+# 추천 시간대 요금 조회
+# =========================
+
+recommended_fee_result = hourly_fee[
+
+    (hourly_fee['hour']
+     == recommended_hour)
+
+    &
+
+    (hourly_fee['charging_type']
+     == charging_type_text)
+]
+
+if len(recommended_fee_result) > 0:
+
+    recommended_fee = (
+        recommended_fee_result[
+            '충전요금(합계) (charging_fee)'
+        ].values[0]
+    )
+
+else:
+
+    recommended_fee = charging_fee
+# =========================
+# 효과 계산
+# =========================
+
+peak_reduction = (
+    (
+        charging_load
+        - recommended_load
+    )
+    / charging_load
+) * 100
+
+cost_saving = (
+    (
+        charging_fee
+        - recommended_fee
+    )
+    / charging_fee
+) * 100
+
+peak_reduction = round(
+    peak_reduction,
+    1
+)
+
+cost_saving = round(
+    cost_saving,
+    1
+)
 
     st.success(
         f"추천 충전 시작 시간: 약 {prediction}시간 뒤"
     )
+st.write(
+    f"예상 전력 피크 감소 효과: "
+    f"{peak_reduction}%"
+)
+
+st.write(
+    f"예상 충전요금 절감 효과: "
+    f"{cost_saving}%"
+)
 
     st.subheader("📊 충전 환경 분석")
 
