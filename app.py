@@ -358,7 +358,7 @@ else:
     )
 
 st.write(
-    f"지금은 {fee_message} 시간대입니다."
+    f"지금은 전기가 {fee_message}인 시간대입니다."
 )
 if (
         outside_temperature > 30
