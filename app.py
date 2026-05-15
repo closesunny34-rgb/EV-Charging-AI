@@ -389,7 +389,7 @@ if st.button("AI 충전 추천 받기"):
         )
     st.write(
         f"예상 전력 피크 감소 효과: "
-        f"{peak_reduction}%"
+        f"{abs(peak_reduction)}%"
     )
 
     st.write(
