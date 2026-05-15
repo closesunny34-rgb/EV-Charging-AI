@@ -376,7 +376,7 @@ cost_saving = round(
     1
 )
 
-    st.success(
+st.success(
         f"추천 충전 시작 시간: 약 {prediction}시간 뒤"
     )
 st.write(
