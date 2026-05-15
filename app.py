@@ -360,7 +360,7 @@ else:
 st.write(
     f"지금은 {fee_message} 시간대입니다."
 )
-    if (
+if (
         outside_temperature > 30
         and charging_type_text == '급속'
     ):
@@ -370,13 +370,13 @@ st.write(
             "배터리 발열 위험이 증가할 수 있습니다."
         )
 
-    if load_score == 2:
+if load_score == 2:
 
         st.warning(
             "현재는 최대부하 시간대입니다."
         )
 
-    if charging_fee > 15000:
+if charging_fee > 15000:
 
         st.info(
             "현재 시간대는 충전요금이 높은 편입니다."
